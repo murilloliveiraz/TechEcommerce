@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tech_ecommerce/controllers/product_controller.dart';
 import 'package:tech_ecommerce/controllers/user_controller.dart';
 import 'package:provider/provider.dart';
-import 'package:tech_ecommerce/ui/widgets/carousel.dart';
+import 'package:tech_ecommerce/ui/pages/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,9 +18,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => UserController()),
         ChangeNotifierProvider(create: (context) => ProductController()),
       ],
-      child: const MaterialApp(
+      child: MaterialApp(
         title: 'Ecommerce',
-        home: Carousel(),
+        home: Login(),
       ),
     );
   }

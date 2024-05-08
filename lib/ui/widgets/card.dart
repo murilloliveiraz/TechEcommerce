@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:tech_ecommerce/controllers/user_controller.dart';
 import 'package:tech_ecommerce/models/product_model.dart';
+import 'package:tech_ecommerce/models/user_model.dart';
+import 'package:tech_ecommerce/ui/pages/shopping_cart.dart';
 import 'package:tech_ecommerce/ui/styles/styles.dart';
 
 class ProductCard extends StatefulWidget {
   final ProductModel product;
   final UserController userController;
+  final String userName;
 
-  const ProductCard({super.key, required this.product, required this.userController});
+  const ProductCard({super.key, required this.product, required this.userController, required this.userName});
 
   @override
   State<ProductCard> createState() => _ProductCardState();
@@ -50,7 +53,7 @@ class _ProductCardState extends State<ProductCard> {
                             }
                           });
                         },
-                        icon: isFavorite ? Icon(Icons.favorite) : Icon(Icons.favorite_outline),
+                        icon: isFavorite ? const Icon(Icons.favorite) : const Icon(Icons.favorite_outline),
                       ),
                     ),
                   ],
@@ -62,7 +65,8 @@ class _ProductCardState extends State<ProductCard> {
                 child: ElevatedButton(
                   onPressed: () {
                     widget.userController.addToShoppingCart("murillo@gmail.com", widget.product);
-                  },
+                    Navigator.of(context).push(MaterialPageRoute(builder: (_)=> const ShoppingCart()));
+                   },
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
                   child: Text('Comprar', style: fontAppWhite(16)),
                 ),

@@ -29,21 +29,27 @@ class UserController with ChangeNotifier {
   }
 
   void signIn(context, String email, String password){
-    var user = UserModel(email: email, password: password);
-    notifyListeners();
-    userDatabase.users.add(user);
-    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_) => const HomePage()), (route) => false);
+    if (email.isNotEmpty && email.contains('@')){
+      UserModel user = UserModel(email: email, password: password);
+      notifyListeners();
+      userDatabase.users.add(user);
+      login(context, email, password);
+    }else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.red,
+          content: Text('Credenciais inválidas'),
+        )
+      );
+    }
   }
 
   void login(context, String email, String password){
     var users = userDatabase.users;
     var result = users.where((user) => user.email == email);
-    //UserModel user = UserModel(email: email, password: password);
     notifyListeners();
     if (result.isNotEmpty) {
-      Navigator.pushAndRemoveUntil(
-        context, MaterialPageRoute(builder: (_)=> const HomePage()),
-        (route) => false);
+      Navigator.of(context).push(MaterialPageRoute(builder: (_) => HomePage(userName: email)));
     }else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(

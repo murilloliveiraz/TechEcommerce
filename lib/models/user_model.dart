@@ -4,8 +4,7 @@ class UserModel {
   String email;
   String password;
   List<ProductModel> products = [];
-  List<ProductModel> favorites = [ProductModel(name: 'Macbook', price: 7989.00, description: 'M3', pictureURL: 'https://m.media-amazon.com/images/G/32/apple/NPI/Jun_22/Family_Stripe/AMZ_FamilyStripe_MacBook_Pro_13_in._CB633575652_.png'),
-    ];
+  List<ProductModel> favorites = [];
 
   UserModel({required this.email, required this.password});
 
